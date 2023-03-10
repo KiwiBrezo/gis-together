@@ -1,19 +1,13 @@
 package main
 
 import (
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	GisRouters "gis-geo-importer/GisRouters"
 )
 
-func getHealth(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, "test")
-}
-
 func main() {
-	router := gin.Default()
+	var endpointRouter = GisRouters.EndpointRouter{}
 
-	router.GET("/", getHealth)
+	endpointRouter.Init()
 
-	router.Run("localhost:8080")
+	endpointRouter.Router.Run("localhost:8080")
 }
