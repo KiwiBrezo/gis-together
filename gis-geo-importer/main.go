@@ -1,13 +1,13 @@
 package main
 
 import (
-	GisRouters "gis-geo-importer/GisRouters"
+	GisApi "gis-geo-importer/GisApi"
 )
 
 func main() {
-	var endpointRouter = GisRouters.EndpointRouter{}
+	var endpointRouter = GisApi.HttpApi{}
 
 	endpointRouter.Init()
 
-	endpointRouter.Router.Run("localhost:8080")
+	endpointRouter.StartServer("localhost:8080")
 }
