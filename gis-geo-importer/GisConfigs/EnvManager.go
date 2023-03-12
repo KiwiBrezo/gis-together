@@ -9,7 +9,7 @@ import (
 func GetENVByKey(key string) string {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal("(GetENVByKey) Error loading .env file")
 	}
 
 	return os.Getenv(key)

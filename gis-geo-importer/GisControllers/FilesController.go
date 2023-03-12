@@ -17,6 +17,7 @@ type FilesController struct {
 func (f *FilesController) Init(router *gin.Engine) {
 	f.httpRouter = router
 	f.filesManagerService = GisService.FileManager{}
+	f.filesManagerService.Init()
 }
 
 func (f *FilesController) BindEndpoints() {
@@ -31,16 +32,28 @@ func (f *FilesController) uploadFile(c *gin.Context) {
 	err := c.ShouldBindJSON(&geojsonData)
 
 	if err != nil {
-		log.Printf("There was an error with parsing recived json: %v", err)
+		log.Fatalf("(uploadFile) There was an error with parsing recived json: %v", err)
+
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": fmt.Sprintf("There was an error with parsing recived json: %v", err),
 		})
+
+		return
 	}
 
-	f.filesManagerService.SaveNewFile(&geojsonData)
+	insertedId, err := f.filesManagerService.SaveNewFile(&geojsonData)
+	if err != nil {
+		log.Fatalf("(uploadFile) There was an error with inserting into DB: %v", err)
+
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": fmt.Sprintf("There was an error with inserting into DB: %v", err),
+		})
+
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"status": geojsonData,
+		"status": insertedId,
 	})
 }
 
