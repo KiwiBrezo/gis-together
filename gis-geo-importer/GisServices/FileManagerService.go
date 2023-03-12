@@ -17,7 +17,6 @@ func (f *FileManager) Init() {
 
 func (f *FileManager) SaveNewFile(geojson *GisModels.FeatureCollection) (insertedId string, err error) {
 	insertedId, err = f.fileDBConnector.SaveGeojsonToDB(geojson)
-
 	return
 }
 
@@ -25,6 +24,7 @@ func (f *FileManager) GetFile(id string) {
 
 }
 
-func (f *FileManager) DeleteFile(id string) {
-
+func (f *FileManager) DeleteFile(id string) (numberOfDeleted int, err error) {
+	numberOfDeleted, err = f.fileDBConnector.DeleteGeojsonFromDB(id)
+	return
 }

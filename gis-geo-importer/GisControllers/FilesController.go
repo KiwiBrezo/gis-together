@@ -66,7 +66,20 @@ func (f *FilesController) getFile(c *gin.Context) {
 
 func (f *FilesController) deleteFile(c *gin.Context) {
 	fileId := c.Param("id")
+
+	numberOfDeleted, err := f.filesManagerService.DeleteFile(fileId)
+
+	if err != nil {
+		log.Fatalf("(getFile) There was an error deleting geojson with id (%s) from DB: %v", fileId, err)
+
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": fmt.Sprintf("(getFile) There was an error deleting geojson with id (%s) from DB: %v", fileId, err),
+		})
+
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
-		"status": fmt.Sprintf("Deleted file: %s", fileId),
+		"status": fmt.Sprintf("There where %d items successfuly deleted with id %s", numberOfDeleted, fileId),
 	})
 }

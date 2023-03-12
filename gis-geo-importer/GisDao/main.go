@@ -16,27 +16,26 @@ func ConnectToMongoDB() {
 		return
 	}
 
-	DBInstance, err := mongo.NewClient(options.Client().ApplyURI(GisConfigs.GetENVByKey("MONGODB_URL")))
+	newMongoInstance, err := mongo.NewClient(options.Client().ApplyURI(GisConfigs.GetENVByKey("MONGODB_URL")))
 	if err != nil {
 		log.Fatalf("(ConnectToMongoDB) There was an error creating the mongoDB mongoDBInstance: %v", err)
 	}
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = DBInstance.Connect(ctx)
+	err = newMongoInstance.Connect(ctx)
 
 	if err != nil {
 		log.Fatalf("(ConnectToMongoDB) There was an error connecting to the mongoDB with mongoDBInstance: %v", err)
 	}
 
-	//ping the database
-	err = DBInstance.Ping(ctx, nil)
+	err = newMongoInstance.Ping(ctx, nil)
 	if err != nil {
 		log.Fatalf("(ConnectToMongoDB) There was an error pinging the mongodb database: %v", err)
 	}
 
-	mongoDBInstance = DBInstance
-
 	log.Printf("(ConnectToMongoDB) Successfuly Connected to MongoDB")
+
+	mongoDBInstance = newMongoInstance
 }
 
 func GetMongoDB() *mongo.Client {

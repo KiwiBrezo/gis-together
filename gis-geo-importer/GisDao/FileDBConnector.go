@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"gis-geo-importer/GisModels"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 )
 
@@ -22,7 +24,16 @@ func (f *FileDBConnector) SaveGeojsonToDB(geojson *GisModels.FeatureCollection) 
 	return fmt.Sprintf("%s", result.InsertedID), nil
 }
 
-func (f *FileDBConnector) DeleteGeojsonToDB(id string) (idDeleted string, err error) {
+func (f *FileDBConnector) DeleteGeojsonFromDB(id string) (numberOfDeleted int, err error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 
-	return "", nil
+	objId, _ := primitive.ObjectIDFromHex(id)
+
+	result, err := GetCollection("geojson").DeleteOne(ctx, bson.M{"_id": objId})
+	if err != nil {
+		return
+	}
+
+	return int(result.DeletedCount), nil
 }
