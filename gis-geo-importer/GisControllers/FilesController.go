@@ -32,7 +32,7 @@ func (f *FilesController) uploadFile(c *gin.Context) {
 	err := c.ShouldBindJSON(&geojsonData)
 
 	if err != nil {
-		log.Fatalf("(uploadFile) There was an error with parsing recived json: %v", err)
+		log.Printf("(uploadFile) There was an error with parsing recived json: %v", err)
 
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": fmt.Sprintf("There was an error with parsing recived json: %v", err),
@@ -43,7 +43,7 @@ func (f *FilesController) uploadFile(c *gin.Context) {
 
 	insertedId, err := f.filesManagerService.SaveNewFile(&geojsonData)
 	if err != nil {
-		log.Fatalf("(uploadFile) There was an error with inserting into DB: %v", err)
+		log.Printf("(uploadFile) There was an error with inserting into DB: %v", err)
 
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": fmt.Sprintf("There was an error with inserting into DB: %v", err),
@@ -53,15 +53,25 @@ func (f *FilesController) uploadFile(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"status": insertedId,
+		"status": fmt.Sprintf("Inserted Geojson with id: %s", insertedId),
 	})
 }
 
 func (f *FilesController) getFile(c *gin.Context) {
 	fileId := c.Param("id")
-	c.JSON(http.StatusOK, gin.H{
-		"status": fmt.Sprintf("Here is file: %s", fileId),
-	})
+
+	path, err := f.filesManagerService.GetFile(fileId)
+	if err != nil {
+		log.Printf("(getFile) There is no file with id: %s (err: %v)", fileId, err)
+
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": fmt.Sprintf("(getFile) There is no file with id: %s (err: %v)", fileId, err),
+		})
+
+		return
+	}
+
+	c.FileAttachment(path, fmt.Sprintf("%s.geojson", fileId))
 }
 
 func (f *FilesController) deleteFile(c *gin.Context) {
@@ -70,7 +80,7 @@ func (f *FilesController) deleteFile(c *gin.Context) {
 	numberOfDeleted, err := f.filesManagerService.DeleteFile(fileId)
 
 	if err != nil {
-		log.Fatalf("(getFile) There was an error deleting geojson with id (%s) from DB: %v", fileId, err)
+		log.Printf("(deleteFile) There was an error deleting geojson with id (%s) from DB: %v", fileId, err)
 
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": fmt.Sprintf("(getFile) There was an error deleting geojson with id (%s) from DB: %v", fileId, err),

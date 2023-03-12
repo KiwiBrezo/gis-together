@@ -2,7 +2,6 @@ package GisDao
 
 import (
 	"context"
-	"fmt"
 	"gis-geo-importer/GisModels"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -21,7 +20,7 @@ func (f *FileDBConnector) SaveGeojsonToDB(geojson *GisModels.FeatureCollection) 
 		return
 	}
 
-	return fmt.Sprintf("%s", result.InsertedID), nil
+	return result.InsertedID.(primitive.ObjectID).Hex(), nil
 }
 
 func (f *FileDBConnector) DeleteGeojsonFromDB(id string) (numberOfDeleted int, err error) {
