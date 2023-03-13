@@ -22,4 +22,13 @@ jobs:
       - name: Test gis-geo-importer
         run: |
           cd ./gis-geo-importer
-          go test -v gis-geo-importer/test
+          go test -json > TestResults.json
+      - name: Upload Go test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: TestResults
+          path: TestResults.json
+      - name: Download Go test results
+        uses: actions/download-artifact@v3
+        with:
+          name: TestResults
