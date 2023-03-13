@@ -1,0 +1,17 @@
+name: Run auto tests
+
+on: [push]
+
+jobs:
+  test-gis-geo-importer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+      - name: Build gis-geo-importer
+        run: go build -v ./gis-geo-importer/...
+      - name: Test gis-geo-importer
+        run: go test -v ./gis-geo-importer/...
