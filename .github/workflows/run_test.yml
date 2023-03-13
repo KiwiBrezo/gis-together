@@ -18,6 +18,8 @@ jobs:
           ls
           go get .
       - name: Build gis-geo-importer
-        run: go build -v gis-geo-importer
+        run: |
+          ls
+          go build
       - name: Test gis-geo-importer
         run: go test -v gis-geo-importer/test
