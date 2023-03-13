@@ -11,15 +11,15 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: 1.19
-      - name: Change to build and test directory, install dependencies
+      - name: Install dependencies
         run: |
-          ls
           cd ./gis-geo-importer
-          ls
           go get .
       - name: Build gis-geo-importer
         run: |
-          ls
+          cd ./gis-geo-importer
           go build
       - name: Test gis-geo-importer
-        run: go test -v gis-geo-importer/test
+        run: |
+          cd ./gis-geo-importer
+          go test -v gis-geo-importer/test
