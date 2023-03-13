@@ -1,0 +1,86 @@
+definitions:
+  GisModels.Feature:
+    properties:
+      geometry:
+        $ref: '#/definitions/GisModels.Geometry'
+      properties:
+        additionalProperties: true
+        type: object
+      type:
+        type: string
+    type: object
+  GisModels.FeatureCollection:
+    properties:
+      crs:
+        additionalProperties: true
+        type: object
+      features:
+        items:
+          $ref: '#/definitions/GisModels.Feature'
+        type: array
+      name:
+        type: string
+      type:
+        type: string
+    type: object
+  GisModels.Geometry:
+    properties:
+      coordinates: {}
+      type:
+        type: string
+    type: object
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: List of exposed endpoint and how-to use it.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger geo-import API
+  version: "1.0"
+paths:
+  /file:
+    post:
+      consumes:
+      - application/json
+      description: Saves geojson to local storage and saves it do the database.
+      parameters:
+      - description: geojson
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/GisModels.FeatureCollection'
+      produces:
+      - application/json
+      responses: {}
+      summary: Saves geojson
+  /file/{id}:
+    delete:
+      description: Deletes file from local storage and from database.
+      parameters:
+      - description: File ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete geojson file
+    get:
+      description: Gets and return geojson file from local storage.
+      parameters:
+      - description: File ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get geojson file
+swagger: "2.0"

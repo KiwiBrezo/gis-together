@@ -26,6 +26,15 @@ func (controller *FilesController) BindEndpoints() {
 	controller.httpRouter.DELETE("/api/v1/file/:id", controller.deleteFile)
 }
 
+// @BasePath /api/v1
+
+// uploadFile godoc
+// @Summary Saves geojson
+// @Description Saves geojson to local storage and saves it do the database.
+// @Param request body GisModels.FeatureCollection true "geojson"
+// @Accept json
+// @Produce json
+// @Router /file [post]
 func (controller *FilesController) uploadFile(c *gin.Context) {
 	var geojsonData GisModels.FeatureCollection
 
@@ -57,6 +66,13 @@ func (controller *FilesController) uploadFile(c *gin.Context) {
 	})
 }
 
+// @BasePath /api/v1
+// getFile godoc
+// @Summary Get geojson file
+// @Description Gets and return geojson file from local storage.
+// @Param        id		path	string	true	"File ID"
+// @Produce json
+// @Router /file/{id} [get]
 func (controller *FilesController) getFile(c *gin.Context) {
 	fileId := c.Param("id")
 
@@ -74,6 +90,13 @@ func (controller *FilesController) getFile(c *gin.Context) {
 	c.FileAttachment(path, fmt.Sprintf("%s.geojson", fileId))
 }
 
+// @BasePath /api/v1
+// deleteFile godoc
+// @Summary Delete geojson file
+// @Description Deletes file from local storage and from database.
+// @Param        id		path	string	true	"File ID"
+// @Produce json
+// @Router /file/{id} [delete]
 func (controller *FilesController) deleteFile(c *gin.Context) {
 	fileId := c.Param("id")
 

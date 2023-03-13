@@ -1,0 +1,127 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "List of exposed endpoint and how-to use it.",
+        "title": "Swagger geo-import API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/file": {
+            "post": {
+                "description": "Saves geojson to local storage and saves it do the database.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Saves geojson",
+                "parameters": [
+                    {
+                        "description": "geojson",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GisModels.FeatureCollection"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/file/{id}": {
+            "get": {
+                "description": "Gets and return geojson file from local storage.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get geojson file",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "File ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "description": "Deletes file from local storage and from database.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Delete geojson file",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "File ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "GisModels.Feature": {
+            "type": "object",
+            "properties": {
+                "geometry": {
+                    "$ref": "#/definitions/GisModels.Geometry"
+                },
+                "properties": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "GisModels.FeatureCollection": {
+            "type": "object",
+            "properties": {
+                "crs": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "features": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GisModels.Feature"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "GisModels.Geometry": {
+            "type": "object",
+            "properties": {
+                "coordinates": {},
+                "type": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
