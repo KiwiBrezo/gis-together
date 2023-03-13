@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"net/http"
 )
 
 type HttpApi struct {
@@ -14,6 +15,7 @@ type HttpApi struct {
 
 func (api *HttpApi) Init() *HttpApi {
 	api.router = gin.Default()
+	api.bindPing()
 	api.bindSwagger()
 	api.bindEndpoints()
 
@@ -37,4 +39,10 @@ func (api *HttpApi) bindEndpoints() {
 func (api *HttpApi) bindSwagger() {
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	api.router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+}
+
+func (api *HttpApi) bindPing() {
+	api.router.GET("/ping", func(c *gin.Context) {
+		c.String(http.StatusOK, "pong")
+	})
 }
