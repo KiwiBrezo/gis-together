@@ -23,5 +23,5 @@ func main() {
 
 	endpointRouter.Init()
 
-	endpointRouter.StartServer("localhost:8080")
+	endpointRouter.StartServer("0.0.0.0:8080")
 }
