@@ -14,6 +14,6 @@ jobs:
       - name: Change to build and test directory
         run: cd ./gis-geo-importer
       - name: Build gis-geo-importer
-        run: go build -v ./...
+        run: go build -v gis-geo-importer
       - name: Test gis-geo-importer
-        run: go test -v ./...
+        run: go test -v gis-geo-importer/test
