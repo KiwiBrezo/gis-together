@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-type FileDBConnector struct {
+type FilesRepository struct {
 }
 
-func (f *FileDBConnector) SaveGeojsonToDB(geojson *GisModels.FeatureCollection) (id string, err error) {
+func (repository *FilesRepository) SaveGeojsonToDB(geojson *GisModels.FeatureCollection) (id string, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -23,7 +23,7 @@ func (f *FileDBConnector) SaveGeojsonToDB(geojson *GisModels.FeatureCollection) 
 	return result.InsertedID.(primitive.ObjectID).Hex(), nil
 }
 
-func (f *FileDBConnector) DeleteGeojsonFromDB(id string) (numberOfDeleted int, err error) {
+func (repository *FilesRepository) DeleteGeojsonFromDB(id string) (numberOfDeleted int, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
