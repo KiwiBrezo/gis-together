@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: TestResults
-          path: TestResults.json
+          path: ./gis-geo-importer/TestResults.json
       - name: Download Go test results
         uses: actions/download-artifact@v3
         with:
