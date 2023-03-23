@@ -2,7 +2,7 @@ package main
 
 import (
 	"gis-geo-importer/GisApi"
-	"gis-geo-importer/GisDao"
+	"gis-geo-importer/GisReposetory"
 )
 
 // @title           Swagger geo-import API
@@ -19,7 +19,7 @@ import (
 func main() {
 	var endpointRouter = GisApi.HttpApi{}
 
-	GisDao.ConnectToMongoDB()
+	GisReposetory.ConnectToMongoDB()
 
 	endpointRouter.Init()
 

@@ -1,4 +1,4 @@
-package GisDao
+package GisReposetory
 
 import (
 	"context"

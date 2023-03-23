@@ -3,20 +3,20 @@ package service
 import (
 	"encoding/json"
 	"fmt"
-	"gis-geo-importer/GisDao"
 	"gis-geo-importer/GisModels"
+	"gis-geo-importer/GisReposetory"
 	"log"
 	"os"
 )
 
 type FilesService struct {
 	pathToFileFolder string
-	fileDBConnector  *GisDao.FilesRepository
+	fileDBConnector  *GisReposetory.FilesRepository
 }
 
 func (service *FilesService) Init() {
 	service.pathToFileFolder = "./files"
-	service.fileDBConnector = &GisDao.FilesRepository{}
+	service.fileDBConnector = &GisReposetory.FilesRepository{}
 }
 
 func (service *FilesService) SaveNewFile(geojson *GisModels.FeatureCollection) (insertedId string, err error) {
