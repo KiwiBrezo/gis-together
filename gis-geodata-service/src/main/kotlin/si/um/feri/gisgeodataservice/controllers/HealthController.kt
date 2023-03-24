@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/v1")
-class GeoDataController {
+class HealthController {
 
     @GetMapping("/ping")
-    fun pong() : ResponseEntity<String> {
+    fun pong(): ResponseEntity<String>
+    {
         return ResponseEntity("Pong", HttpStatusCode.valueOf(200))
     }
+
 }
