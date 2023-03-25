@@ -42,9 +42,13 @@ jobs:
         with:
           java-version: '17'
       - name: Build
-        run: mvn --batch-mode -DskipTests package
+        run: |
+          cd ./gis-geodata-service
+          mvn --batch-mode -DskipTests package
       - name: Test
-        run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
+        run: |
+          cd ./gis-geodata-service
+          mvn --batch-mode -Dmaven.test.failure.ignore=true test
       - name: Report
         uses: dorny/test-reporter@v1
         if: always()
