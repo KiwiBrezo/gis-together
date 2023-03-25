@@ -19,7 +19,7 @@ class GeojsonController(@Autowired var geojsonService: GeojsonService) {
     @GetMapping("/")
     fun getAllGeojson() : ResponseEntity<Flux<Geojson>> {
         try {
-            return ResponseEntity(geojsonService.getAllFeatureCollections(), HttpStatusCode.valueOf(200))
+            return ResponseEntity(geojsonService.getAllGeojsons(), HttpStatusCode.valueOf(200))
         } catch (e: Exception) {
             return ResponseEntity(HttpStatusCode.valueOf(500))
         }

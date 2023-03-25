@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.js" integrity="sha512-lyIq9fRcCeSCXhp41XC/250UBmypAHV8KW+AhLcSEIksWHBfhzub6XXwDe67wTpOG8zrO2NAU/TYmEaCW+aQSg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous"></script>
+
+    <script type = "text/javascript">
+        if ("WebSocket" in window) {
+            console.log("WebSocket is supported by your Browser!");
+
+            var sock = new SockJS('http://localhost:8080/geojson-connector');
+            let client = Stomp.over(sock);
+
+            // Start the STOMP communications, provide a callback for when the CONNECT frame arrives.
+            client.connect({}, frame => {
+                client.subscribe("/topic/feature-collections", payload => {
+                    const geojson = JSON.parse(payload.body);
+
+                    console.log(geojson);
+
+                });
+            });
+
+            function getAllGeojsons() {
+                client.send('/app/get-all', {}, JSON.stringify({name: "test"}));
+            }
+
+        } else {
+            alert("WebSocket NOT supported by your Browser!");
+        }
+    </script>
+
+</head>
+
+<body>
+<button onclick="getAllGeojsons()">Pridobi vse geojsone</button>
+
+<ul id="message-list"></ul>
+
+</body>
+</html>

@@ -9,7 +9,7 @@ import si.um.feri.gisgeodataservice.repository.GeojsonRepository
 
 @Service
 class GeojsonService(@Autowired var geojsonRepository: GeojsonRepository) {
-    fun getAllFeatureCollections(): Flux<Geojson> {
+    fun getAllGeojsons(): Flux<Geojson> {
         return geojsonRepository.findAll()
     }
 
