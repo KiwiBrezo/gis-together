@@ -18,7 +18,12 @@
                     const geojson = JSON.parse(payload.body);
 
                     console.log(geojson);
+                });
 
+                client.subscribe("/topic/push/feature-collections", payload => {
+                    const geojson = JSON.parse(payload.body);
+
+                    console.log(geojson);
                 });
             });
 
