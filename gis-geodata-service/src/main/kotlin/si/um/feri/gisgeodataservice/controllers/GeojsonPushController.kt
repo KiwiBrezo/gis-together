@@ -1,5 +1,6 @@
 package si.um.feri.gisgeodataservice.controllers
 
+import io.swagger.v3.oas.annotations.Operation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,6 +18,7 @@ class GeojsonPushController(@Autowired private var geojsonPushData: GeojsonPushD
 
     private var logger: Logger = LoggerFactory.getLogger(GeojsonPushController::class.java)
 
+    @Operation(summary = "Push all geojsons with socket")
     @GetMapping("/")
     fun pushAllGeojsons(): ResponseEntity<String> {
         return try {
@@ -30,6 +32,7 @@ class GeojsonPushController(@Autowired private var geojsonPushData: GeojsonPushD
         }
     }
 
+    @Operation(summary = "Push geojsons by Id with socket")
     @GetMapping("/{id}")
     fun pushFeatureCollectionWithId(@PathVariable id: String): ResponseEntity<String> {
         return try {

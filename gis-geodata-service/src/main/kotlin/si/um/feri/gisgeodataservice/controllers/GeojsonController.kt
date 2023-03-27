@@ -1,5 +1,6 @@
 package si.um.feri.gisgeodataservice.controllers
 
+import io.swagger.v3.oas.annotations.Operation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,6 +21,7 @@ class GeojsonController(@Autowired private var geojsonService: GeojsonService) {
 
     private var logger: Logger = LoggerFactory.getLogger(GeojsonController::class.java)
 
+    @Operation(summary = "Get all geojson")
     @GetMapping("/")
     fun getAllGeojson() : ResponseEntity<Flux<Geojson>> {
         return try {
@@ -32,6 +34,7 @@ class GeojsonController(@Autowired private var geojsonService: GeojsonService) {
         }
     }
 
+    @Operation(summary = "Get geojson by Id")
     @GetMapping("/{id}")
     fun getByIdGeojson(@PathVariable id: String) : ResponseEntity<Mono<Geojson>> {
         return try {
@@ -44,6 +47,7 @@ class GeojsonController(@Autowired private var geojsonService: GeojsonService) {
         }
     }
 
+    @Operation(summary = "Get geojson by name")
     @GetMapping("/name/{name}")
     fun getByNameGeojson(@PathVariable name: String) : ResponseEntity<Flux<Geojson>> {
         return try {

@@ -1,5 +1,6 @@
 package si.um.feri.gisgeodataservice.controllers
 
+import io.swagger.v3.oas.annotations.Operation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatusCode
@@ -14,6 +15,7 @@ class HealthController {
 
     private var logger: Logger = LoggerFactory.getLogger(HealthController::class.java)
 
+    @Operation(summary = "Get heart bit from server")
     @GetMapping("/ping")
     fun pong(): ResponseEntity<String>
     {
