@@ -48,12 +48,13 @@ jobs:
       - name: Test
         run: |
           cd ./gis-geodata-service
-          mvn --batch-mode -Dmaven.test.failure.ignore=true test
-      - name: Report
-        uses: dorny/test-reporter@v1
-        if: always()
+          mvn --batch-mode -Dmaven.test.failure.ignore=false test    
+      - name: Upload Spring Boot test results
+        uses: actions/upload-artifact@v3
         with:
-          name: Maven Tests
-          path: gis-geodata-service/target/surefire-reports/*.xml
-          reporter: java-junit
-          fail-on-error: true
+          name: TestResults
+          path: ./gis-geodata-service/target/surefire-reports/*.txt
+      - name: Download Spring Boot test results
+        uses: actions/download-artifact@v3
+        with:
+          name: TestResults
