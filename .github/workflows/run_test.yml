@@ -26,12 +26,12 @@ jobs:
       - name: Upload Go test results
         uses: actions/upload-artifact@v3
         with:
-          name: TestResults
+          name: TestResultsGoLang
           path: ./gis-geo-importer/TestResults.json
       - name: Download Go test results
         uses: actions/download-artifact@v3
         with:
-          name: TestResults
+          name: TestResultsGoLang
 
   test-gis-geodata-service:
     runs-on: ubuntu-latest
@@ -52,9 +52,9 @@ jobs:
       - name: Upload Spring Boot test results
         uses: actions/upload-artifact@v3
         with:
-          name: TestResults
+          name: TestResultsSpringBoot
           path: ./gis-geodata-service/target/surefire-reports/*.txt
       - name: Download Spring Boot test results
         uses: actions/download-artifact@v3
         with:
-          name: TestResults
+          name: TestResultsSpringBoot
