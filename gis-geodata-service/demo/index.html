@@ -12,21 +12,30 @@
             var sock = new SockJS('http://localhost:8080/geojson-connector');
             let client = Stomp.over(sock);
 
-            // Start the STOMP communications, provide a callback for when the CONNECT frame arrives.
             client.connect({}, frame => {
                 client.subscribe("/topic/feature-collections", payload => {
                     const geojson = JSON.parse(payload.body);
 
+                    console.log("Recived data on startup");
                     console.log(geojson);
                 });
 
-                client.subscribe("/topic/push/feature-collections", payload => {
+                client.subscribe("/topic/push/feature-collections/new", payload => {
                     const geojson = JSON.parse(payload.body);
 
+                    console.log("Recived data for new geojson");
+                    console.log(geojson);
+                });
+
+                client.subscribe("/topic/push/feature-collections/all", payload => {
+                    const geojson = JSON.parse(payload.body);
+
+                    console.log("Recived data all geojson from db");
                     console.log(geojson);
                 });
             });
 
+            //Make first call to load all geojsons
             function getAllGeojsons() {
                 client.send('/app/get-all', {}, JSON.stringify({name: "test"}));
             }
