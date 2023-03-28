@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"gis-geo-importer/GisModels"
 	"gis-geo-importer/GisReposetory"
+	"github.com/anjieych/go-activeMQ"
 	"log"
 	"os"
 )
@@ -31,6 +32,12 @@ func (service *FilesService) SaveNewFile(geojson *GisModels.FeatureCollection) (
 
 	if errFile != nil {
 		log.Printf("(SaveNewFile) There was an error saving Geojson to disk: %v", errFile)
+	}
+
+	errMq := activeMQ.NewActiveMQ("localhost:61613").Send("/queue/insertedGeojson", "test from 1")
+
+	if errMq != nil {
+		log.Printf("(SaveNewFile) There was an error sending message to ActiveMq: %v", errMq)
 	}
 
 	return
