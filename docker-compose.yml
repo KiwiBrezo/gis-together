@@ -6,6 +6,12 @@ services:
     container_name: activemq
     ports: 
       - 61616:61616
+      - 61613:61613
+      - 8161:8161
+      - 5672:5672
+      - 1883:1883
+    environment:
+      - ACTIVEMQ_CONFIG_QUEUES_insertedGeojson=insertedGeojson
 
   gis-geo-importer:
     image: gis-geo-importer
