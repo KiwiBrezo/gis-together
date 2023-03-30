@@ -1,6 +1,19 @@
 version: '3.1'
 services:
 
+  postgres:
+    image: postgres:15.2-alpine
+    container_name: postgres
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=gis-together
+    volumes:
+      - ./database/account_user_table.sql:/docker-entrypoint-initdb.d/account_user_table.sql
+
   activemq:
     image: symptoma/activemq:latest
     container_name: activemq
