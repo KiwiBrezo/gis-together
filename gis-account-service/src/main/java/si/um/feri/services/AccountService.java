@@ -6,6 +6,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.smallrye.common.annotation.Blocking;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import si.um.feri.controllers.RegisterController;
 import si.um.feri.mappers.AccountMapper;
 import si.um.feri.models.Account;
 import si.um.feri.models.AccountEntity;
@@ -26,6 +29,7 @@ import java.util.UUID;
 @Slf4j
 public class AccountService {
 
+    private Logger logger = LoggerFactory.getLogger(AccountService.class);
     private final String JWT_SECRET = "asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4";
     private final String JWT_SUBJECT = "valid account";
 
@@ -38,10 +42,12 @@ public class AccountService {
     @Transactional
     public Boolean registerAccount(Account domain) {
         try {
+            logger.info("Converting domain object to entity and inserting it.");
             AccountEntity entity = accountMapper.toEntity(domain);
             accountRepository.persist(entity);
             return true;
         } catch (Exception e) {
+            logger.info("There was an error while inserting new user into the database.");
             e.printStackTrace();
             return false;
         }
@@ -49,15 +55,18 @@ public class AccountService {
 
     @Blocking
     public String loginAccount(Account account) {
+        logger.info(("Getting account with username: ").concat(account.getUsername()));
         AccountEntity accountEntity = accountRepository.find("username", account.getUsername()).firstResult();
 
         if (accountEntity == null) {
+            logger.info("There was no such account.");
             return null;
         }
 
         Account domainAccount = accountMapper.toDomain(accountEntity);
 
         if (!account.getPassword().equals(domainAccount.getPassword())) {
+            logger.info("The password doesn't match");
             return null;
         }
 
@@ -79,6 +88,8 @@ public class AccountService {
 
     @Blocking
     public Boolean checkJwtToken(String token) {
+        logger.info(("Checking if JWT token is not expired and is valid: ").concat(token));
+
         Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(JWT_SECRET),
                 SignatureAlgorithm.HS256.getJcaName());
 
