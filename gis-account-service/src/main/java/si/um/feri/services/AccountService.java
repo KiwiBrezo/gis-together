@@ -26,7 +26,8 @@ import java.util.UUID;
 @Slf4j
 public class AccountService {
 
-    private final String secret = "asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4";
+    private final String JWT_SECRET = "asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4";
+    private final String JWT_SUBJECT = "valid account";
 
     @Inject
     private AccountRepository accountRepository;
@@ -61,15 +62,15 @@ public class AccountService {
         }
 
 
-        Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret),
+        Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(JWT_SECRET),
                 SignatureAlgorithm.HS256.getJcaName());
 
         String jwtToken = Jwts.builder()
                 .claim("name", account.getUsername())
-                .setSubject("valid account")
+                .setSubject(JWT_SUBJECT)
                 .setId(UUID.randomUUID().toString())
                 .setIssuedAt(Date.from(Instant.now()))
-                .setExpiration(Date.from(Instant.now().plus(60l, ChronoUnit.MINUTES)))
+                .setExpiration(Date.from(Instant.now().plus(60L, ChronoUnit.MINUTES)))
                 .signWith(hmacKey)
                 .compact();
 
@@ -78,7 +79,7 @@ public class AccountService {
 
     @Blocking
     public Boolean checkJwtToken(String token) {
-        Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret),
+        Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(JWT_SECRET),
                 SignatureAlgorithm.HS256.getJcaName());
 
         Jws<Claims> jwt = Jwts.parserBuilder()
@@ -86,6 +87,8 @@ public class AccountService {
                 .build()
                 .parseClaimsJws(token);
 
-        return jwt.getBody().get("sub").equals("valid account");
+        return jwt.getBody().get("sub").equals(JWT_SUBJECT) &&
+                jwt.getBody().get("name") != null &&
+                (Integer) jwt.getBody().get("exp") > Integer.valueOf((int) new Date().getTime());
     }
 }

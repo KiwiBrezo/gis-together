@@ -5,8 +5,8 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
-@Entity(name = "Acount")
-@Table(name = "acount")
+@Entity(name = "Account")
+@Table(name = "account")
 @Data
 public class AccountEntity {
     @Id
