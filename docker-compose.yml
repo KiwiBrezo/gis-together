@@ -51,3 +51,16 @@ services:
     ports:
       - "8082:8080"
     restart: always
+
+  gis-account-service:
+    image: gis-account-service
+    build:
+      context: ./gis-account-service/
+      dockerfile: Dockerfile
+    container_name: gis-account-service
+    hostname: gis-account-service
+    depends_on:
+      - postgres
+    ports:
+      - "8083:8080"
+    restart: always
