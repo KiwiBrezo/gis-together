@@ -58,3 +58,30 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: TestResultsSpringBoot
+
+
+  test-gis-geodata-service:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '17'
+      - name: Build
+        run: |
+          cd ./gis-account-service
+          mvn --batch-mode -DskipTests package
+      - name: Test
+        run: |
+          cd ./gis-account-service
+          mvn --batch-mode -Dmaven.test.failure.ignore=false test    
+      - name: Upload Quarkus test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: TestResultsQuarkus
+          path: ./gis-account-service/target/surefire-reports/*.txt
+      - name: Download Quarkus test results
+        uses: actions/download-artifact@v3
+        with:
+          name: TestResultsQuarkus
