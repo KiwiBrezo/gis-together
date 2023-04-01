@@ -47,7 +47,7 @@ public class AccountService {
             accountRepository.persist(entity);
             return true;
         } catch (Exception e) {
-            logger.info("There was an error while inserting new user into the database.");
+            logger.error("There was an error while inserting new user into the database.");
             e.printStackTrace();
             return false;
         }

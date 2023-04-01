@@ -36,7 +36,7 @@ public class LoginController {
             }
             return RestResponse.ResponseBuilder.ok(jwt, MediaType.TEXT_PLAIN).build();
         } catch (Exception e) {
-            logger.info(("There was an error while login the user in: ").concat(e.getMessage()));
+            logger.error(("There was an error while login the user in: ").concat(e.getMessage()));
             e.printStackTrace();
             return RestResponse.ResponseBuilder.create(500, e.getMessage()).build();
         }

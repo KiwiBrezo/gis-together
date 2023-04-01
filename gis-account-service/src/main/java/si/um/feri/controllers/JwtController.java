@@ -29,8 +29,7 @@ public class JwtController {
                 return RestResponse.ResponseBuilder.ok("JWT is valid", MediaType.TEXT_PLAIN_TYPE).build();
             }
         } catch (Exception e) {
-            logger.info(("There was an error while checking if jwt token is valid: ").concat(e.getMessage()));
-            e.printStackTrace();
+            logger.error(("There was an error while checking if jwt token is valid: ").concat(e.getMessage()));
         }
 
         return RestResponse.ResponseBuilder.create(401, "JWT is not valid").build();

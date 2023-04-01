@@ -34,7 +34,7 @@ public class RegisterController {
 
             return RestResponse.ResponseBuilder.create(400, "Account cant be created").build();
         } catch (Exception e) {
-            logger.info(("There was an error creating new user: ").concat(e.getMessage()));
+            logger.error(("There was an error creating new user: ").concat(e.getMessage()));
             e.printStackTrace();
             return RestResponse.ResponseBuilder.create(500, e.getMessage()).build();
         }

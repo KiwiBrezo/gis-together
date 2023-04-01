@@ -11,9 +11,9 @@ service JwtGrpc {
 }
 
 message JwtRequest {
-    string name = 1;
+    string token = 1;
 }
 
 message JwtValidReply {
-    string message = 1;
+    string valid = 1;
 }
