@@ -12,12 +12,14 @@ import (
 type FilesController struct {
 	httpRouter          *gin.Engine
 	filesManagerService GisService.FilesService
+	jwtService          GisService.AccountJwtService
 }
 
 func (controller *FilesController) Init(router *gin.Engine) {
 	controller.httpRouter = router
 	controller.filesManagerService = GisService.FilesService{}
 	controller.filesManagerService.Init()
+	controller.jwtService = GisService.AccountJwtService{}
 }
 
 func (controller *FilesController) BindEndpoints() {
@@ -36,6 +38,16 @@ func (controller *FilesController) BindEndpoints() {
 // @Produce json
 // @Router /file [post]
 func (controller *FilesController) uploadFile(c *gin.Context) {
+	if !controller.jwtService.CheckIfTokenIsValid(c.Request.Header.Get("Authorization")) {
+		log.Printf("(uploadFile) The JWT token in headers is not valid!")
+
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error": "JWT token is not valid",
+		})
+
+		return
+	}
+
 	var geojsonData GisModels.FeatureCollection
 
 	err := c.ShouldBindJSON(&geojsonData)
@@ -74,6 +86,16 @@ func (controller *FilesController) uploadFile(c *gin.Context) {
 // @Produce json
 // @Router /file/{id} [get]
 func (controller *FilesController) getFile(c *gin.Context) {
+	if !controller.jwtService.CheckIfTokenIsValid(c.Request.Header.Get("Authorization")) {
+		log.Printf("(getFile) The JWT token in headers is not valid!")
+
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error": "JWT token is not valid",
+		})
+
+		return
+	}
+
 	fileId := c.Param("id")
 
 	path, err := controller.filesManagerService.GetFile(fileId)
@@ -98,6 +120,16 @@ func (controller *FilesController) getFile(c *gin.Context) {
 // @Produce json
 // @Router /file/{id} [delete]
 func (controller *FilesController) deleteFile(c *gin.Context) {
+	if !controller.jwtService.CheckIfTokenIsValid(c.Request.Header.Get("Authorization")) {
+		log.Printf("(deleteFile) The JWT token in headers is not valid!")
+
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error": "JWT token is not valid",
+		})
+
+		return
+	}
+
 	fileId := c.Param("id")
 
 	numberOfDeleted, err := controller.filesManagerService.DeleteFile(fileId)

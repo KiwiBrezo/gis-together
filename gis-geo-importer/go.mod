@@ -3,18 +3,21 @@ module gis-geo-importer
 go 1.19
 
 require (
+	github.com/anjieych/go-activeMQ v0.0.0-20180321094620-0ae37faa88ea
 	github.com/gin-gonic/gin v1.9.0
 	github.com/go-playground/assert/v2 v2.2.0
+	github.com/golang/protobuf v1.5.2
 	github.com/joho/godotenv v1.5.1
 	github.com/swaggo/files v1.0.0
 	github.com/swaggo/gin-swagger v1.5.3
 	github.com/swaggo/swag v1.8.10
 	go.mongodb.org/mongo-driver v1.11.2
+	google.golang.org/grpc v1.54.0
+	google.golang.org/protobuf v1.29.0
 )
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
-	github.com/anjieych/go-activeMQ v0.0.0-20180321094620-0ae37faa88ea // indirect
 	github.com/bytedance/sonic v1.8.4 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
@@ -53,6 +56,6 @@ require (
 	golang.org/x/sys v0.6.0 // indirect
 	golang.org/x/text v0.8.0 // indirect
 	golang.org/x/tools v0.7.0 // indirect
-	google.golang.org/protobuf v1.29.0 // indirect
+	google.golang.org/genproto v0.0.0-20230110181048-76db0878b65f // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

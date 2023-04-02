@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "/GisGrpc";
+
+package proto;
+
+service JwtGrpc {
+    rpc CheckJwtValidity (JwtRequest) returns (JwtValidReply) {}
+}
+
+message JwtRequest {
+    string token = 1;
+}
+
+message JwtValidReply {
+    string valid = 1;
+}
