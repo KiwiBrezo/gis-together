@@ -35,8 +35,9 @@ services:
     hostname: gis-geo-importer
     depends_on:
       - activemq
+      - gis-account-service
     ports:
-      - "8081:8080"
+      - 8081:8080
     restart: always
 
   gis-geodata-service:
@@ -48,19 +49,22 @@ services:
     hostname: gis-geodata-service
     depends_on:
       - activemq
+      - gis-account-service
     ports:
-      - "8082:8080"
+      - 8082:8080
     restart: always
 
   gis-account-service:
     image: gis-account-service
     build:
       context: ./gis-account-service/
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.jvm
     container_name: gis-account-service
     hostname: gis-account-service
     depends_on:
       - postgres
     ports:
-      - "8083:8080"
+      - 8083:8080
+      - 8443:8443
+      - 9000:9000
     restart: always
