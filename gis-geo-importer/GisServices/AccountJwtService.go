@@ -15,10 +15,13 @@ import (
 
 type AccountJwtService struct{}
 
-func (service *AccountJwtService) CheckIfTokenIsValid(token string) bool {
+func (service *AccountJwtService) CheckIfTokenIsValid(token string) (isValid bool) {
+	isValid = false
+
 	conn, err := grpc.Dial("localhost:9000", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Printf("(CheckIfTokenIsValid) There was an error connecting to Account service gRPC: %v", err)
+		return
 	}
 
 	defer conn.Close()
@@ -35,12 +38,14 @@ func (service *AccountJwtService) CheckIfTokenIsValid(token string) bool {
 	res, err := client.CheckJwtValidity(ctx, &req)
 	if err != nil {
 		log.Printf("(CheckIfTokenIsValid) There was an error checking the jwt token %v", err)
+		return
 	}
 
-	isValid, err := strconv.ParseBool(res.Valid)
+	isValid, err = strconv.ParseBool(res.Valid)
 	if err != nil {
 		log.Printf("(CheckIfTokenIsValid) There was an error converting response string to boolean: %v", err)
+		return
 	}
 
-	return isValid
+	return
 }
