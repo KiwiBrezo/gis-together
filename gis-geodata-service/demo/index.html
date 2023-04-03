@@ -9,7 +9,7 @@
         if ("WebSocket" in window) {
             console.log("WebSocket is supported by your Browser!");
 
-            var sock = new SockJS('http://localhost:8080/geojson-connector');
+            var sock = new SockJS('http://localhost:8081/geojson-connector');
             let client = Stomp.over(sock);
 
             client.connect({}, frame => {
@@ -37,7 +37,7 @@
 
             //Make first call to load all geojsons
             function getAllGeojsons() {
-                client.send('/app/get-all', {}, JSON.stringify({name: "test"}));
+                client.send('/app/get-all', {}, JSON.stringify({jwtToken: "test"}));
             }
 
         } else {

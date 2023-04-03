@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "si.um.feri.proto";
+option java_outer_classname = "JwtGrpcProto";
+
+package proto;
+
+service JwtGrpc {
+  rpc CheckJwtValidity (JwtRequest) returns (JwtValidReply) {}
+}
+
+message JwtRequest {
+  string token = 1;
+}
+
+message JwtValidReply {
+  string valid = 1;
+}

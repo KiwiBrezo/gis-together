@@ -1,4 +1,4 @@
 package si.um.feri.gisgeodataservice.models
 
-data class GeojsonsWSConnector(var name: String) {
+data class GeojsonsWSConnector(var jwtToken: String) {
 }
