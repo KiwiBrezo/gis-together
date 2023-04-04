@@ -1,4 +1,4 @@
-![DDD for gis-geod-account module](../.project/user.drawio.png)
+![DDD for gis-geod-account module](../.github/user.drawio.png)
 
 ---
 

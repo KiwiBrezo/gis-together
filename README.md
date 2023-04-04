@@ -3,6 +3,6 @@
 
 ---
 
-![System diagram](/.project/system-diagram.drawio.png)
+![System diagram](/.github/system-diagram.drawio.png)
 
 ---

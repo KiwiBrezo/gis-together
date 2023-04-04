@@ -1,4 +1,4 @@
-![DDD for gis-geodata module](../.project/geo-data.drawio.png)
+![DDD for gis-geodata module](../.github/geo-data.drawio.png)
 
 ---
 
