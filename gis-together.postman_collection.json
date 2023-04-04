@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "112be264-07b4-4875-aac1-bcb0cc879d8d",
+		"name": "IPT_2_semester_ITA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Geo-Importer",
+			"item": [
+				{
+					"name": "Save Geojson file to database",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsInN1YiI6InZhbGlkIGFjY291bnQiLCJqdGkiOiJjZWI3NDgxYy0zYTEzLTRhY2UtODgzMS03NmFmNGMyMzFkNjIiLCJpYXQiOjE2ODA2MDM5MDAsImV4cCI6MTY4MDYwNzUwMH0.2yxacckK1gxsP-UGYwPfDbiIXS4sP3_7up9VM5hLrLE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\" : \"FeatureCollection\",\r\n  \"name\" : \"linije\",\r\n  \"crs\" : {\r\n    \"type\" : \"name\",\r\n    \"properties\" : {\r\n      \"name\" : \"urn:ogc:def:crs:EPSG::3794\"\r\n    }\r\n  },\r\n  \"features\" : [ {\r\n    \"type\" : \"Feature\",\r\n    \"properties\" : {\r\n      \"linijaEID\" : 300200000362206353,\r\n      \"upravljavecID\" : \"12977\",\r\n      \"tematika\" : 1100,\r\n      \"vrstaObjekta\" : 1101,\r\n      \"ccKlasifikacija\" : 21120,\r\n      \"vrstaTopologije\" : 2,\r\n      \"tocnostDolocitvePolozaja\" : 8,\r\n      \"tocnostDolocitveVisine\" : 0,\r\n      \"vir\" : 2,\r\n      \"datumVira\" : \"20180816\",\r\n      \"gji\" : 1,\r\n      \"zunanjaTlorisnaDimenzija\" : null,\r\n      \"zunanjaVertikalnaDimenzija\" : null,\r\n      \"opuscenost\" : 1,\r\n      \"letoIzgradnje\" : null,\r\n      \"visinskiDatum\" : 0,\r\n      \"atr1\" : 13,\r\n      \"atr2\" : 0,\r\n      \"atr3\" : 0,\r\n      \"atr4\" : \"0\",\r\n      \"atr5\" : null,\r\n      \"opis\" : \"BelaĂ„Ĺ¤eva ulica (od PreÄąÄľi\",\r\n      \"tipSpremembe\" : \"N\"\r\n    },\r\n    \"geometry\" : {\r\n      \"type\" : \"MultiLineString\",\r\n      \"coordinates\" : [ [ [ 548906.27, 157929.39, -99.0 ], [ 548903.09, 157930.41, -99.0 ], [ 548900.18, 157931.35, -99.0 ], [ 548897.27, 157932.21, -99.0 ], [ 548894.72, 157932.99, -99.0 ], [ 548892.26, 157933.71, -99.0 ], [ 548889.23, 157934.7, -99.0 ], [ 548886.26, 157935.99, -99.0 ], [ 548883.2, 157937.49, -99.0 ], [ 548880.44, 157938.9, -99.0 ], [ 548878.04, 157940.02, -99.0 ], [ 548875.01, 157941.3, -99.0 ], [ 548871.8, 157942.44, -99.0 ], [ 548868.41, 157943.43, -99.0 ], [ 548865.53, 157944.27, -99.0 ], [ 548861.9, 157945.26, -99.0 ], [ 548858.06, 157946.29, -99.0 ], [ 548855.48, 157947.0, -99.0 ], [ 548852.84, 157947.7, -99.0 ], [ 548850.2, 157948.42, -99.0 ], [ 548847.53, 157949.16, -99.0 ], [ 548844.83, 157949.88, -99.0 ], [ 548842.1, 157950.63, -99.0 ], [ 548839.34, 157951.36, -99.0 ], [ 548836.58, 157952.11, -99.0 ], [ 548833.82, 157952.83, -99.0 ], [ 548830.37, 157953.72, -99.0 ], [ 548827.58, 157954.41, -99.0 ], [ 548824.79, 157955.13, -99.0 ], [ 548822.03, 157955.85, -99.0 ], [ 548818.61, 157956.72, -99.0 ], [ 548815.82, 157957.42, -99.0 ], [ 548812.43, 157958.31, -99.0 ], [ 548809.64, 157959.03, -99.0 ], [ 548806.88, 157959.73, -99.0 ], [ 548803.52, 157960.57, -99.0 ], [ 548800.76, 157961.26, -99.0 ], [ 548798.03, 157961.97, -99.0 ], [ 548794.73, 157962.79, -99.0 ], [ 548792.06, 157963.46, -99.0 ], [ 548789.45, 157964.12, -99.0 ], [ 548786.84, 157964.78, -99.0 ], [ 548783.69, 157965.59, -99.0 ], [ 548781.17, 157966.22, -99.0 ], [ 548778.71, 157966.85, -99.0 ], [ 548775.71, 157967.6, -99.0 ], [ 548772.23, 157968.47, -99.0 ], [ 548768.57, 157969.37, -99.0 ], [ 548765.51, 157970.15, -99.0 ], [ 548762.6, 157970.86, -99.0 ], [ 548758.67, 157971.77, -99.0 ], [ 548715.38, 157980.83, -99.0 ] ] ]\r\n    }\r\n  }, {\r\n    \"type\" : \"Feature\",\r\n    \"properties\" : {\r\n      \"linijaEID\" : 300200000362197735,\r\n      \"upravljavecID\" : \"11455\",\r\n      \"tematika\" : 1100,\r\n      \"vrstaObjekta\" : 1101,\r\n      \"ccKlasifikacija\" : 21120,\r\n      \"vrstaTopologije\" : 2,\r\n      \"tocnostDolocitvePolozaja\" : 8,\r\n      \"tocnostDolocitveVisine\" : 0,\r\n      \"vir\" : 2,\r\n      \"datumVira\" : \"20180816\",\r\n      \"gji\" : 1,\r\n      \"zunanjaTlorisnaDimenzija\" : null,\r\n      \"zunanjaVertikalnaDimenzija\" : null,\r\n      \"opuscenost\" : 1,\r\n      \"letoIzgradnje\" : null,\r\n      \"visinskiDatum\" : 0,\r\n      \"atr1\" : 13,\r\n      \"atr2\" : 0,\r\n      \"atr3\" : 0,\r\n      \"atr4\" : \"0\",\r\n      \"atr5\" : null,\r\n      \"opis\" : \"PristaniÄąË‡ka ul. (od KoroÄąË\",\r\n      \"tipSpremembe\" : \"N\"\r\n    },\r\n    \"geometry\" : {\r\n      \"type\" : \"MultiLineString\",\r\n      \"coordinates\" : [ [ [ 549146.21, 157830.25, -99.0 ], [ 549146.84, 157825.71, -99.0 ], [ 549147.23, 157821.33, -99.0 ], [ 549147.62, 157815.18, -99.0 ], [ 549147.89, 157810.95, -99.0 ], [ 549148.4, 157803.37, -99.0 ], [ 549148.94, 157796.5, -99.0 ], [ 549149.27, 157787.35, -99.0 ], [ 549149.45, 157780.57, -99.0 ], [ 549149.15, 157774.51, -99.0 ], [ 549148.64, 157766.33, -99.0 ], [ 549147.74, 157753.48, -99.0 ], [ 549146.54, 157742.64, -99.0 ], [ 549145.79, 157736.46, -99.0 ], [ 549145.07, 157731.54, -99.0 ], [ 549144.2, 157725.58, -99.0 ] ] ]\r\n    }\r\n  }, {\r\n    \"type\" : \"Feature\",\r\n    \"properties\" : {\r\n      \"linijaEID\" : 300200000362207583,\r\n      \"upravljavecID\" : \"13560\",\r\n      \"tematika\" : 1100,\r\n      \"vrstaObjekta\" : 1101,\r\n      \"ccKlasifikacija\" : 21120,\r\n      \"vrstaTopologije\" : 2,\r\n      \"tocnostDolocitvePolozaja\" : 8,\r\n      \"tocnostDolocitveVisine\" : 0,\r\n      \"vir\" : 2,\r\n      \"datumVira\" : \"20180816\",\r\n      \"gji\" : 1,\r\n      \"zunanjaTlorisnaDimenzija\" : null,\r\n      \"zunanjaVertikalnaDimenzija\" : null,\r\n      \"opuscenost\" : 1,\r\n      \"letoIzgradnje\" : null,\r\n      \"visinskiDatum\" : 0,\r\n      \"atr1\" : 12,\r\n      \"atr2\" : 0,\r\n      \"atr3\" : 0,\r\n      \"atr4\" : \"0\",\r\n      \"atr5\" : null,\r\n      \"opis\" : \"KoroÄąË‡ka cesta (od Strma u.\",\r\n      \"tipSpremembe\" : \"N\"\r\n    },\r\n    \"geometry\" : {\r\n      \"type\" : \"MultiLineString\",\r\n      \"coordinates\" : [ [ [ 548837.33, 157900.36, -99.0 ], [ 548840.75, 157900.33, -99.0 ], [ 548844.23, 157900.16, -99.0 ], [ 548847.5, 157899.83, -99.0 ], [ 548851.04, 157899.32, -99.0 ], [ 548861.15, 157897.34, -99.0 ], [ 548870.87, 157895.27, -99.0 ], [ 548879.66, 157893.44, -99.0 ], [ 548885.9, 157892.48, -99.0 ], [ 548888.51, 157892.23, -99.0 ], [ 548890.82, 157892.27, -99.0 ], [ 548893.16, 157892.36, -99.0 ] ] ]\r\n    }\r\n  }, {\r\n    \"type\" : \"Feature\",\r\n    \"properties\" : {\r\n      \"linijaEID\" : 300200000362207591,\r\n      \"upravljavecID\" : \"13561\",\r\n      \"tematika\" : 1100,\r\n      \"vrstaObjekta\" : 1101,\r\n      \"ccKlasifikacija\" : 21120,\r\n      \"vrstaTopologije\" : 2,\r\n      \"tocnostDolocitvePolozaja\" : 8,\r\n      \"tocnostDolocitveVisine\" : 0,\r\n      \"vir\" : 2,\r\n      \"datumVira\" : \"20180816\",\r\n      \"gji\" : 1,\r\n      \"zunanjaTlorisnaDimenzija\" : null,\r\n      \"zunanjaVertikalnaDimenzija\" : null,\r\n      \"opuscenost\" : 1,\r\n      \"letoIzgradnje\" : null,\r\n      \"visinskiDatum\" : 0,\r\n      \"atr1\" : 12,\r\n      \"atr2\" : 0,\r\n      \"atr3\" : 0,\r\n      \"atr4\" : \"0\",\r\n      \"atr5\" : null,\r\n      \"opis\" : \"KoroÄąË‡ka cesta (od Strma u.\",\r\n      \"tipSpremembe\" : \"N\"\r\n    },\r\n    \"geometry\" : {\r\n      \"type\" : \"MultiLineString\",\r\n      \"coordinates\" : [ [ [ 548893.16, 157892.36, -99.0 ], [ 548893.25, 157893.53, -99.0 ], [ 548893.52, 157894.61, -99.0 ], [ 548894.03, 157895.62, -99.0 ], [ 548894.66, 157896.41, -99.0 ], [ 548895.41, 157897.09, -99.0 ], [ 548896.22, 157897.58, -99.0 ], [ 548897.0, 157897.96, -99.0 ], [ 548898.11, 157898.23, -99.0 ], [ 548899.13, 157898.26, -99.0 ] ] ]\r\n    }\r\n  }, {\r\n    \"type\" : \"Feature\",\r\n    \"properties\" : {\r\n      \"linijaEID\" : 300200000362207609,\r\n      \"upravljavecID\" : \"13562\",\r\n      \"tematika\" : 1100,\r\n      \"vrstaObjekta\" : 1101,\r\n      \"ccKlasifikacija\" : 21120,\r\n      \"vrstaTopologije\" : 2,\r\n      \"tocnostDolocitvePolozaja\" : 8,\r\n      \"tocnostDolocitveVisine\" : 0,\r\n      \"vir\" : 2,\r\n      \"datumVira\" : \"20180816\",\r\n      \"gji\" : 1,\r\n      \"zunanjaTlorisnaDimenzija\" : null,\r\n      \"zunanjaVertikalnaDimenzija\" : null,\r\n      \"opuscenost\" : 1,\r\n      \"letoIzgradnje\" : null,\r\n      \"visinskiDatum\" : 0,\r\n      \"atr1\" : 12,\r\n      \"atr2\" : 0,\r\n      \"atr3\" : 0,\r\n      \"atr4\" : \"0\",\r\n      \"atr5\" : null,\r\n      \"opis\" : \"KoroÄąË‡ka cesta (od Strma u.\",\r\n      \"tipSpremembe\" : \"N\"\r\n    },\r\n    \"geometry\" : {\r\n      \"type\" : \"MultiLineString\",\r\n      \"coordinates\" : [ [ [ 548899.13, 157898.26, -99.0 ], [ 548900.09, 157898.12, -99.0 ], [ 548901.02, 157897.85, -99.0 ], [ 548902.01, 157897.3, -99.0 ], [ 548902.76, 157896.79, -99.0 ], [ 548903.63, 157895.9, -99.0 ], [ 548904.26, 157894.82, -99.0 ], [ 548904.56, 157893.89, -99.0 ], [ 548904.74, 157892.8, -99.0 ], [ 548904.71, 157891.67, -99.0 ], [ 548904.53, 157890.74, -99.0 ], [ 548904.23, 157889.99, -99.0 ], [ 548903.75, 157889.15, -99.0 ], [ 548903.12, 157888.4, -99.0 ], [ 548902.19, 157887.67, -99.0 ] ] ]\r\n    }\r\n  }, {\r\n    \"type\" : \"Feature\",\r\n    \"properties\" : {\r\n      \"linijaEID\" : 300200000362207617,\r\n      \"upravljavecID\" : \"13563\",\r\n      \"tematika\" : 1100,\r\n      \"vrstaObjekta\" : 1101,\r\n      \"ccKlasifikacija\" : 21120,\r\n      \"vrstaTopologije\" : 2,\r\n      \"tocnostDolocitvePolozaja\" : 8,\r\n      \"tocnostDolocitveVisine\" : 0,\r\n      \"vir\" : 2,\r\n      \"datumVira\" : \"20180816\",\r\n      \"gji\" : 1,\r\n      \"zunanjaTlorisnaDimenzija\" : null,\r\n      \"zunanjaVertikalnaDimenzija\" : null,\r\n      \"opuscenost\" : 1,\r\n      \"letoIzgradnje\" : null,\r\n      \"visinskiDatum\" : 0,\r\n      \"atr1\" : 12,\r\n      \"atr2\" : 0,\r\n      \"atr3\" : 0,\r\n      \"atr4\" : \"0\",\r\n      \"atr5\" : null,\r\n      \"opis\" : \"KoroÄąË‡ka cesta (od Strma u.\",\r\n      \"tipSpremembe\" : \"N\"\r\n    },\r\n    \"geometry\" : {\r\n      \"type\" : \"MultiLineString\",\r\n      \"coordinates\" : [ [ [ 548902.19, 157887.67, -99.0 ], [ 548901.17, 157887.11, -99.0 ], [ 548900.03, 157886.75, -99.0 ], [ 548898.92, 157886.63, -99.0 ], [ 548897.72, 157886.78, -99.0 ], [ 548896.43, 157887.17, -99.0 ], [ 548895.56, 157887.71, -99.0 ], [ 548894.69, 157888.4, -99.0 ], [ 548894.09, 157889.15, -99.0 ], [ 548893.58, 157890.11, -99.0 ], [ 548893.31, 157891.1, -99.0 ], [ 548893.16, 157892.36, -99.0 ] ] ]\r\n    }\r\n  }, {\r\n    \"type\" : \"Feature\",\r\n    \"properties\" : {\r\n      \"linijaEID\" : 300200000362207625,\r\n      \"upravljavecID\" : \"13564\",\r\n      \"tematika\" : 1100,\r\n      \"vrstaObjekta\" : 1101,\r\n      \"ccKlasifikacija\" : 21120,\r\n      \"vrstaTopologije\" : 2,\r\n      \"tocnostDolocitvePolozaja\" : 8,\r\n      \"tocnostDolocitveVisine\" : 0,\r\n      \"vir\" : 2,\r\n      \"datumVira\" : \"20180816\",\r\n      \"gji\" : 1,\r\n      \"zunanjaTlorisnaDimenzija\" : null,\r\n      \"zunanjaVertikalnaDimenzija\" : null,\r\n      \"opuscenost\" : 1,\r\n      \"letoIzgradnje\" : null,\r\n      \"visinskiDatum\" : 0,\r\n      \"atr1\" : 12,\r\n      \"atr2\" : 0,\r\n      \"atr3\" : 0,\r\n      \"atr4\" : \"0\",\r\n      \"atr5\" : null,\r\n      \"opis\" : \"KoroÄąË‡ka cesta (med kroÄąÄľi\",\r\n      \"tipSpremembe\" : \"N\"\r\n    },\r\n    \"geometry\" : {\r\n      \"type\" : \"MultiLineString\",\r\n      \"coordinates\" : [ [ [ 549146.21, 157830.25, -99.0 ], [ 549160.67, 157824.01, -99.0 ], [ 549163.97, 157822.65, -99.0 ], [ 549167.27, 157821.48, -99.0 ], [ 549170.39, 157820.76, -99.0 ], [ 549173.33, 157820.19, -99.0 ] ] ]\r\n    }\r\n  }, {\r\n    \"type\" : \"Feature\",\r\n    \"properties\" : {\r\n      \"linijaEID\" : 300200000362207633,\r\n      \"upravljavecID\" : \"13565\",\r\n      \"tematika\" : 1100,\r\n      \"vrstaObjekta\" : 1101,\r\n      \"ccKlasifikacija\" : 21120,\r\n      \"vrstaTopologije\" : 2,\r\n      \"tocnostDolocitvePolozaja\" : 8,\r\n      \"tocnostDolocitveVisine\" : 0,\r\n      \"vir\" : 2,\r\n      \"datumVira\" : \"20180816\",\r\n      \"gji\" : 1,\r\n      \"zunanjaTlorisnaDimenzija\" : null,\r\n      \"zunanjaVertikalnaDimenzija\" : null,\r\n      \"opuscenost\" : 1,\r\n      \"letoIzgradnje\" : null,\r\n      \"visinskiDatum\" : 0,\r\n      \"atr1\" : 12,\r\n      \"atr2\" : 0,\r\n      \"atr3\" : 0,\r\n      \"atr4\" : \"0\",\r\n      \"atr5\" : null,\r\n      \"opis\" : \"KoroÄąË‡ka cesta (med kroÄąÄľi\",\r\n      \"tipSpremembe\" : \"N\"\r\n    },\r\n    \"geometry\" : {\r\n      \"type\" : \"MultiLineString\",\r\n      \"coordinates\" : [ [ [ 549121.49, 157836.39, -99.0 ], [ 549126.95, 157835.34, -99.0 ], [ 549132.89, 157834.2, -99.0 ], [ 549139.37, 157832.49, -99.0 ], [ 549146.21, 157830.25, -99.0 ] ] ]\r\n    }\r\n  }, {\r\n    \"type\" : \"Feature\",\r\n    \"properties\" : {\r\n      \"linijaEID\" : 300200000362207641,\r\n      \"upravljavecID\" : \"13566\",\r\n      \"tematika\" : 1100,\r\n      \"vrstaObjekta\" : 1101,\r\n      \"ccKlasifikacija\" : 21120,\r\n      \"vrstaTopologije\" : 2,\r\n      \"tocnostDolocitvePolozaja\" : 8,\r\n      \"tocnostDolocitveVisine\" : 0,\r\n      \"vir\" : 2,\r\n      \"datumVira\" : \"20180816\",\r\n      \"gji\" : 1,\r\n      \"zunanjaTlorisnaDimenzija\" : null,\r\n      \"zunanjaVertikalnaDimenzija\" : null,\r\n      \"opuscenost\" : 1,\r\n      \"letoIzgradnje\" : null,\r\n      \"visinskiDatum\" : 0,\r\n      \"atr1\" : 12,\r\n      \"atr2\" : 0,\r\n      \"atr3\" : 0,\r\n      \"atr4\" : \"0\",\r\n      \"atr5\" : null,\r\n      \"opis\" : \"KoroÄąË‡ka cesta (med kroÄąÄľi\",\r\n      \"tipSpremembe\" : \"N\"\r\n    },\r\n    \"geometry\" : {\r\n      \"type\" : \"MultiLineString\",\r\n      \"coordinates\" : [ [ [ 548902.19, 157887.67, -99.0 ], [ 548903.99, 157886.41, -99.0 ], [ 548905.76, 157885.46, -99.0 ], [ 548907.68, 157884.74, -99.0 ], [ 548915.24, 157882.61, -99.0 ], [ 548922.5, 157880.89, -99.0 ], [ 548934.14, 157878.17, -99.0 ], [ 548947.22, 157874.87, -99.0 ], [ 548956.67, 157872.44, -99.0 ], [ 548971.34, 157868.6, -99.0 ], [ 548984.3, 157865.23, -99.0 ], [ 548997.38, 157862.24, -99.0 ], [ 549011.93, 157858.95, -99.0 ], [ 549029.0, 157855.05, -99.0 ], [ 549046.88, 157851.61, -99.0 ], [ 549064.82, 157848.18, -99.0 ] ] ]\r\n    }\r\n  } ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/v1/file",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Geojson file from server",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidGVzdCIsInN1YiI6InZhbGlkIGFjY291bnQiLCJqdGkiOiIxNjY3ZDI3Yi0xZDg0LTQ0NzctODgzMi0xMTgxMmFlZmM1NmEiLCJpYXQiOjE2ODA2MDI5MzUsImV4cCI6MTY4MDYwNjUzNX0.6HqE0ubkl1qEGMg0E7UYUHZhWR4qUqA5rdd5j3iFeg0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/v1/file/641cd2c8c2f030755de13b99",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"file",
+								"641cd2c8c2f030755de13b99"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Geojson file from server",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYW4uYnJlem5hckBnbWFpbC5jb20iLCJuYW1lIjoibm92aWNrZS1qd3QtdG9rZW4iLCJleHAiOjE2NzA2MDg0MDMsImlhdCI6MTY3MDU5MDQwM30.vzN0INeZh0X2ZPFUbGt8CQRhRNnovZ5I-30sWNIxo0pxOW_H-dAtGaSlnwRY0DFaoc7BLT5SWHJP_5dPpbPLlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/v1/file/640f5ee9538d40bf26b66d16",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"file",
+								"640f5ee9538d40bf26b66d16"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Geo-Account",
+			"item": [
+				{
+					"name": "Register user for account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"string\",\r\n    \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8083/api/v1/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user anf get JWT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"test123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8083/api/v1/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

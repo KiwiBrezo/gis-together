@@ -2,6 +2,7 @@
 
 <html>
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.js" integrity="sha512-lyIq9fRcCeSCXhp41XC/250UBmypAHV8KW+AhLcSEIksWHBfhzub6XXwDe67wTpOG8zrO2NAU/TYmEaCW+aQSg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous"></script>
 
@@ -18,6 +19,13 @@
 
                     console.log("Recived data on startup");
                     console.log(geojson);
+
+                    $.each(geojson || [], function(index, value) {
+                        $("#message-list")
+                            .append($("<li>")
+                                .append($("<span>").text("Ob zagonu: "))
+                                .append($("<span>").text(value.id)))
+                    })
                 });
 
                 client.subscribe("/topic/push/feature-collections/new", payload => {
@@ -25,6 +33,11 @@
 
                     console.log("Recived data for new geojson");
                     console.log(geojson);
+
+                    $("#message-list")
+                            .append($("<li>")
+                                .append($("<span>").text("Novo dodano: "))
+                                .append($("<span>").text(geojson.id)))
                 });
 
                 client.subscribe("/topic/push/feature-collections/all", payload => {
@@ -37,22 +50,69 @@
 
             //Make first call to load all geojsons
             function getAllGeojsons() {
-                client.send('/app/get-all', {}, JSON.stringify({jwtToken: "test"}));
+                client.send('/app/get-all', {}, JSON.stringify({jwtToken: $("#token").val() || ""}));
             }
 
         } else {
             alert("WebSocket NOT supported by your Browser!");
         }
+
+        function prijava() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8083/api/v1/login",
+                data: JSON.stringify({
+                    username: $("#username").val(),
+                    password: $("#password").val(),
+                }),
+                complete: function(data) {
+                    $("#msg").text("You logged in!");
+                    $("#token").val(data.responseText || "Hmmm no JWT?");
+                },
+                error: function(data) {
+                    $("#msg").text("Ther was an error logging in...");
+                },
+                contentType: "application/json",
+                dataType: "text/plain"
+            });
+        }
+
+        function addNewGeojson() {
+            $.ajax({
+                type: "POST",
+                url: "localhost:8081/api/v1/file",
+                headers: {
+                    "Authorization": "Bearer " + $("#token").val() || ""
+                },
+                data: $("#geojson").val(),
+                complete: function(data) {
+                    console.log(data);
+                    $("#geojson").val("");
+                },
+                error: function(data) {
+                    $("#msg").text("Ther was an error adding new geojson.");
+                },
+                contentType: "application/json",
+                dataType: "text/plain"
+            });
+        }
+
     </script>
 
 </head>
 
 <body>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="prijava()">Prijavi se</button>
     <p id="msg"></p>
-    <input type="text" placeholder="JwtToken">
+    <input type="text" placeholder="JwtToken" id="token">
     <button onclick="getAllGeojsons()">Pridobi vse geojsone</button>
 
     <ul id="message-list"></ul>
+
+    <textarea name="geojson" id="geojson" cols="30" rows="10"></textarea>
+    <button onclick="addNewGeojson()">Dodaj novi geojson</button>
 
 </body>
 </html>
