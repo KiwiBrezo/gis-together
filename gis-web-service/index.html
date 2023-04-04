@@ -37,7 +37,7 @@
 
             //Make first call to load all geojsons
             function getAllGeojsons() {
-                client.send('/app/get-all', {}, JSON.stringify({name: "test"}));
+                client.send('/app/get-all', {}, JSON.stringify({jwtToken: "test"}));
             }
 
         } else {
@@ -48,9 +48,11 @@
 </head>
 
 <body>
-<button onclick="getAllGeojsons()">Pridobi vse geojsone</button>
+    <p id="msg"></p>
+    <input type="text" placeholder="JwtToken">
+    <button onclick="getAllGeojsons()">Pridobi vse geojsone</button>
 
-<ul id="message-list"></ul>
+    <ul id="message-list"></ul>
 
 </body>
 </html>
