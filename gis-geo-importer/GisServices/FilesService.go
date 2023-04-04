@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"gis-geo-importer/GisModels"
 	"gis-geo-importer/GisReposetory"
-	"github.com/anjieych/go-activeMQ"
 	"log"
+	"net/http"
 	"os"
 )
 
@@ -34,10 +34,15 @@ func (service *FilesService) SaveNewFile(geojson *GisModels.FeatureCollection) (
 		log.Printf("(SaveNewFile) There was an error saving Geojson to disk: %v", errFile)
 	}
 
-	errMq := activeMQ.NewActiveMQ("localhost:61613").Send("/queue/insertedGeojson", "test from 1")
+	/*errMq := activeMQ.NewActiveMQ("localhost:61613").Send("/queue/insertedGeojson", "test from 1")
 
 	if errMq != nil {
 		log.Printf("(SaveNewFile) There was an error sending message to ActiveMq: %v", errMq)
+	}*/
+
+	_, errReq := http.Get(fmt.Sprintf("http://localhost:8082/api/v1/push/feature-collections/%s", insertedId))
+	if errReq != nil {
+		log.Printf("(SaveNewFile) Therw was an error while calling push service on gis-geodata-service: %v", errReq)
 	}
 
 	return
