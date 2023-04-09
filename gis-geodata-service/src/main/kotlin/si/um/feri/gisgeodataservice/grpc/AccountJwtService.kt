@@ -5,8 +5,8 @@ import io.grpc.ManagedChannelBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import si.um.feri.proto.JwtGrpcGrpc
-import si.um.feri.proto.JwtRequest
+import si.um.feri.gisgeodataservice.proto.JwtGrpcGrpc
+import si.um.feri.gisgeodataservice.proto.JwtRequest
 
 @Service
 class AccountJwtService() {

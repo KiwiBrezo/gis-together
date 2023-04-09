@@ -2,11 +2,9 @@ package si.um.feri.gisgeodataservice
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
-import io.swagger.v3.oas.annotations.info.License
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
-import org.springframework.jms.annotation.EnableJms
 import si.um.feri.gisgeodataservice.repository.GeojsonRepository
 
 @SpringBootApplication
