@@ -172,7 +172,7 @@
 						</protocPlugin>
 					</protocPlugins>
 				</configuration>
-				<executions>
+				<!--<executions>
 					<execution>
 						<id>compile</id>
 						<goals>
@@ -180,7 +180,7 @@
 							<goal>compile-custom</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions>-->
 			</plugin>
 		</plugins>
 	</build>
