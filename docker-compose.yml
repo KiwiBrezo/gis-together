@@ -14,17 +14,15 @@ services:
     volumes:
       - ./database/account_user_table.sql:/docker-entrypoint-initdb.d/account_user_table.sql
 
-  activemq:
-    image: symptoma/activemq:latest
-    container_name: activemq
-    ports: 
-      - 61616:61616
-      - 61613:61613
-      - 8161:8161
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
       - 5672:5672
-      - 1883:1883
-    environment:
-      - ACTIVEMQ_CONFIG_QUEUES_insertedGeojson=insertedGeojson
+      - 15672:15672
+    volumes:
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
 
   gis-geo-importer:
     image: gis-geo-importer
@@ -34,7 +32,7 @@ services:
     container_name: gis-geo-importer
     hostname: gis-geo-importer
     depends_on:
-      - activemq
+      - rabbitmq
       - gis-account-service
     ports:
       - 8081:8081
@@ -48,7 +46,7 @@ services:
     container_name: gis-geodata-service
     hostname: gis-geodata-service
     depends_on:
-      - activemq
+      - rabbitmq
       - gis-account-service
     ports:
       - 8082:8082

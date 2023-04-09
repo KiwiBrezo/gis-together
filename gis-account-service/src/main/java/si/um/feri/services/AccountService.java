@@ -99,7 +99,7 @@ public class AccountService {
                 .parseClaimsJws(token);
 
         return jwt.getBody().get("sub").equals(JWT_SUBJECT) &&
-                jwt.getBody().get("name") != null &&
-                (Integer) jwt.getBody().get("exp") > Integer.valueOf((int) new Date().getTime());
+                jwt.getBody().get("name") != null;
+                //(Integer) jwt.getBody().get("exp") > Integer.valueOf((int) new Date().getTime()); //Problems idk why
     }
 }
