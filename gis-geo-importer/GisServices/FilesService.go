@@ -6,18 +6,19 @@ import (
 	"gis-geo-importer/GisModels"
 	"gis-geo-importer/GisReposetory"
 	"log"
-	"net/http"
 	"os"
 )
 
 type FilesService struct {
-	pathToFileFolder string
-	fileDBConnector  *GisReposetory.FilesRepository
+	pathToFileFolder         string
+	fileDBConnector          *GisReposetory.FilesRepository
+	newGeojsonPublishService *NewGeojsonPublishService
 }
 
 func (service *FilesService) Init() {
 	service.pathToFileFolder = "./files"
 	service.fileDBConnector = &GisReposetory.FilesRepository{}
+	service.newGeojsonPublishService = &NewGeojsonPublishService{}
 }
 
 func (service *FilesService) SaveNewFile(geojson *GisModels.FeatureCollection) (insertedId string, err error) {
@@ -34,16 +35,7 @@ func (service *FilesService) SaveNewFile(geojson *GisModels.FeatureCollection) (
 		log.Printf("(SaveNewFile) There was an error saving Geojson to disk: %v", errFile)
 	}
 
-	/*errMq := activeMQ.NewActiveMQ("localhost:61613").Send("/queue/insertedGeojson", "test from 1")
-
-	if errMq != nil {
-		log.Printf("(SaveNewFile) There was an error sending message to ActiveMq: %v", errMq)
-	}*/
-
-	_, errReq := http.Get(fmt.Sprintf("http://localhost:8082/api/v1/push/feature-collections/%s", insertedId))
-	if errReq != nil {
-		log.Printf("(SaveNewFile) Therw was an error while calling push service on gis-geodata-service: %v", errReq)
-	}
+	service.newGeojsonPublishService.PublishGeojsonToClients(insertedId)
 
 	return
 }
