@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"gis-geo-importer/GisConfigs"
 	"gis-geo-importer/GisGrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -18,7 +19,7 @@ type AccountJwtService struct{}
 func (service *AccountJwtService) CheckIfTokenIsValid(token string) (isValid bool) {
 	isValid = false
 
-	conn, err := grpc.Dial("localhost:9000", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial(GisConfigs.GetENVByKey("ACCOUNT_SERVICE"), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Printf("(CheckIfTokenIsValid) There was an error connecting to Account service gRPC: %v", err)
 		return

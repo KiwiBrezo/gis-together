@@ -4,14 +4,16 @@ import io.grpc.Channel
 import io.grpc.ManagedChannelBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import si.um.feri.gisgeodataservice.configs.AppProperties
 import si.um.feri.gisgeodataservice.proto.JwtGrpcGrpc
 import si.um.feri.gisgeodataservice.proto.JwtRequest
 
 @Service
-class AccountJwtService() {
+class AccountJwtService(@Autowired private var appProperties: AppProperties) {
 
-    private val grpcChanel: Channel = ManagedChannelBuilder.forAddress("localhost", 9000)
+    private val grpcChanel: Channel = ManagedChannelBuilder.forAddress(appProperties.getAccountServiceUrl(), 9000)
         .usePlaintext()
         .build()
 

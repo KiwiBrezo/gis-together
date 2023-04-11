@@ -4,6 +4,10 @@ services:
   postgres:
     image: postgres:15.2-alpine
     container_name: postgres
+    hostname: postgres
+    networks:
+      gis-together-network:
+        ipv4_address: 192.168.2.6
     ports:
       - 5432:5432
     restart: always
@@ -17,6 +21,10 @@ services:
   rabbitmq:
     image: rabbitmq:management
     container_name: rabbitmq
+    hostname: rabbitmq
+    networks:
+      gis-together-network:
+        ipv4_address: 192.168.2.5
     ports:
       - 5672:5672
       - 15672:15672
@@ -31,6 +39,9 @@ services:
       dockerfile: Dockerfile
     container_name: gis-geo-importer
     hostname: gis-geo-importer
+    networks:
+      gis-together-network:
+        ipv4_address: 192.168.2.10
     depends_on:
       - rabbitmq
       - gis-account-service
@@ -45,6 +56,9 @@ services:
       dockerfile: Dockerfile
     container_name: gis-geodata-service
     hostname: gis-geodata-service
+    networks:
+      gis-together-network:
+        ipv4_address: 192.168.2.11
     depends_on:
       - rabbitmq
       - gis-account-service
@@ -59,6 +73,9 @@ services:
       dockerfile: Dockerfile
     container_name: gis-account-service
     hostname: gis-account-service
+    networks:
+      gis-together-network:
+        ipv4_address: 192.168.2.12
     depends_on:
       - postgres
     ports:
@@ -66,3 +83,11 @@ services:
       - 8443:8443
       - 9000:9000
     restart: always
+
+networks:
+  gis-together-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.2.0/24
