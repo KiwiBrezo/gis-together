@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"gis-geo-importer/GisConfigs"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"log"
 	"time"
@@ -10,7 +11,7 @@ import (
 type NewGeojsonPublishService struct{}
 
 func (service *NewGeojsonPublishService) PublishGeojsonToClients(geojsonId string) {
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	conn, err := amqp.Dial(GisConfigs.GetENVByKey("RABBIT_MQ"))
 	if err != nil {
 		log.Printf("(PublishGeojsonToClients) There was and error connecting to rebbitmq server: %v", err)
 		return

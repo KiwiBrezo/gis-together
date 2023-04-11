@@ -23,7 +23,7 @@ WORKDIR /
 # Copy our static executable.
 COPY --from=builder /go/gis-geo-importer /go/gis-geo-importer
 #COPY public /go/public
-COPY .env /go/.env
+COPY .env.docker /go/.env
 
 RUN mkdir /go/files
 
