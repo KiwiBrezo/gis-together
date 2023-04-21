@@ -7,6 +7,8 @@ WORKDIR /usr/src/app
 COPY . .
 
 RUN npm install
+RUN rm .env
+RUN mv .env.prod .env
 
 EXPOSE 3000
 
