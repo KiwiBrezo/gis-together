@@ -10,7 +10,7 @@
         if ("WebSocket" in window) {
             console.log("WebSocket is supported by your Browser!");
 
-            var sock = new SockJS('http://localhost:8082/geojson-connector');
+            var sock = new SockJS('http://localhost:3000/geojson-connector');
             let client = Stomp.over(sock);
 
             client.connect({}, frame => {
@@ -60,7 +60,7 @@
         function prijava() {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8083/api/v1/login",
+                url: "http://localhost:3000/api/v1/login",
                 data: JSON.stringify({
                     username: $("#username").val(),
                     password: $("#password").val(),
@@ -80,7 +80,7 @@
         function addNewGeojson() {
             $.ajax({
                 type: "POST",
-                url: "localhost:8081/api/v1/file",
+                url: "localhost:3000/api/v1/file",
                 headers: {
                     "Authorization": "Bearer " + $("#token").val() || ""
                 },

@@ -8,8 +8,8 @@ services:
     networks:
       gis-together-network:
         ipv4_address: 192.168.2.6
-    ports:
-      - 5432:5432
+    #ports:
+    #  - 5432:5432
     restart: always
     environment:
       - POSTGRES_USER=root
@@ -26,7 +26,7 @@ services:
       gis-together-network:
         ipv4_address: 192.168.2.5
     ports:
-      - 5672:5672
+    #  - 5672:5672
       - 15672:15672
     volumes:
       - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
@@ -45,8 +45,8 @@ services:
     depends_on:
       - rabbitmq
       - gis-account-service
-    ports:
-      - 8081:8081
+    #ports:
+    #  - 8081:8081
     restart: always
 
   gis-geodata-service:
@@ -78,10 +78,28 @@ services:
         ipv4_address: 192.168.2.12
     depends_on:
       - postgres
+    #ports:
+    #  - 8083:8083
+    #  - 8443:8443
+    #  - 9000:9000
+    restart: always
+
+  gis-api-gateway:
+    image: gis-api-gateway
+    build:
+      context: ./gis-api-gateway/
+      dockerfile: Dockerfile
+    container_name: gis-api-gateway
+    hostname: gis-api-gateway
+    networks:
+      gis-together-network:
+        ipv4_address: 192.168.2.13
+    depends_on:
+      - gis-account-service
+      - gis-geodata-service
+      - gis-geo-importer
     ports:
-      - 8083:8083
-      - 8443:8443
-      - 9000:9000
+      - 3000:3000
     restart: always
 
 networks:

@@ -12,13 +12,15 @@ const port = 3000
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({
+    origin:'http://localhost:8080',
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}));
 
 app.use("/api/v1/account", accountServiceController);
-app.use("/api/v1/geodata", geodataController);
 app.use("/api/v1/importer", importerController);
 
-
-app.listen(port, () => {
+geodataController.installHandlers(app.listen(port, () => {
     console.log(`(SERVER) Server has started on port: ${port}`)
-})
+}), { prefix: '/geojson-connector' });
