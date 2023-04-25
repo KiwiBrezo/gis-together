@@ -10,7 +10,8 @@
         if ("WebSocket" in window) {
             console.log("WebSocket is supported by your Browser!");
 
-            var sock = new SockJS('http://localhost:4000/geojson-connector');
+            //var sock = new SockJS('http://localhost:4000/geojson-connector');
+            var sock = new SockJS('http://localhost:8082/geojson-connector');
             let client = Stomp.over(sock);
 
             client.connect({}, frame => {
