@@ -10,7 +10,7 @@
         if ("WebSocket" in window) {
             console.log("WebSocket is supported by your Browser!");
 
-            var sock = new SockJS('http://localhost:3000/geojson-connector');
+            var sock = new SockJS('http://localhost:4000/geojson-connector');
             let client = Stomp.over(sock);
 
             client.connect({}, frame => {
@@ -60,7 +60,7 @@
         function prijava() {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/api/v1/login",
+                url: "http://localhost:3000/api/v1/account/login",
                 data: JSON.stringify({
                     username: $("#username").val(),
                     password: $("#password").val(),
@@ -80,17 +80,20 @@
         function addNewGeojson() {
             $.ajax({
                 type: "POST",
-                url: "localhost:3000/api/v1/file",
+                url: "http://localhost:3000/api/v1/importer/file",
                 headers: {
                     "Authorization": "Bearer " + $("#token").val() || ""
                 },
                 data: $("#geojson").val(),
                 complete: function(data) {
                     console.log(data);
+                    if (data.status != 200) {
+                        $("#msg").text("Ther was an error adding new geojson.");
+                        return
+                    }
+
+                    $("#msg").text("Successfully added new geojson.");
                     $("#geojson").val("");
-                },
-                error: function(data) {
-                    $("#msg").text("Ther was an error adding new geojson.");
                 },
                 contentType: "application/json",
                 dataType: "text/plain"

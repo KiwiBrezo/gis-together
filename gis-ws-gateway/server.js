@@ -3,23 +3,19 @@ const cors = require("cors");
 
 require('dotenv').config({path: './.env'});
 
-const accountServiceController = require("./routes/account-service-controller");
-const importerController = require("./routes/imported-controller");
+const geodataController = require("./routes/geodata-controller");
 
 const app = express()
-const port = 3000
+const port = 4000
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-    origin:'*',
+    origin:'http://localhost:8080',
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }));
 
-app.use("/api/v1/account", accountServiceController);
-app.use("/api/v1/importer", importerController);
-
-app.listen(port, () => {
+geodataController.installHandlers(app.listen(port, () => {
     console.log(`(SERVER) Server has started on port: ${port}`)
-})
+}), { prefix: '/geojson-connector' });
