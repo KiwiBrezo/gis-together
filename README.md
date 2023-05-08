@@ -1,4 +1,4 @@
-#IT Arhictecture for GIS-Together
+# IT Arhictecture for GIS-Together
 <br> 
 
 ---
