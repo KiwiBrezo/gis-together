@@ -1,6 +1,6 @@
 <template>
   <div class="grid gap-1 grid-cols-1 grid-rows-2">
-    <textarea v-model="this.geojsonInput" rows="13" class="geojson-input"></textarea>
+    <textarea v-model="this.geojsonInput" rows="13" class="geojson-input text-black"></textarea>
     <p>{{this.userToken}}</p>
     <button @click="this.addNewGeojson()">Dodaj novi Geojson</button>
   </div>

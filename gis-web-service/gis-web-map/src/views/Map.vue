@@ -9,13 +9,14 @@
           layer-type="base"
           name="OpenStreetMap"
       ></l-tile-layer>
+      <l-geo-json :geojson="UserStore().getGeojson()"></l-geo-json>
     </l-map>
   </div>
 </template>
 
 <script>
 import "leaflet/dist/leaflet.css";
-import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
+import { LMap, LTileLayer, LGeoJson } from "@vue-leaflet/vue-leaflet";
 import {UserStore} from "@/stores/user";
 import SockJS from "sockjs-client/dist/sockjs";
 import Stomp from "webstomp-client";
@@ -27,6 +28,7 @@ export default {
   },
   data() {
     return {
+      geojson: [],
       zoom: 16,
       sock: null,
       client: null
@@ -43,6 +45,7 @@ export default {
         console.log("Recived data on startup");
         console.log(geojson);
 
+        UserStore().setGeojson(geojson);
       });
 
       this.client.subscribe("/topic/push/feature-collections/new", payload => {
@@ -64,7 +67,8 @@ export default {
   methods: {
     UserStore,
     connectToServerAndGetGeojson() {
-      this.client.send('/app/get-all', {}, JSON.stringify({jwtToken: UserStore().getToken() || ""}));
+      const token = JSON.stringify({jwtToken: UserStore().getToken() || ""});
+      this.client.send('/app/get-all', token, {});
     }
   }
 };
