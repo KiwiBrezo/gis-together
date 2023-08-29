@@ -1,7 +1,7 @@
 package GisApi
 
 import (
-	"gis-geo-importer/GisControllers"
+	"gis-geo-importer/controllers"
 	"gis-geo-importer/docs"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -39,7 +39,7 @@ func (api *HttpApi) GetRouter() *gin.Engine {
 }
 
 func (api *HttpApi) bindEndpoints() {
-	filesController := GisControllers.FilesController{}
+	filesController := controllers.FilesController{}
 	filesController.Init(api.router)
 	filesController.BindEndpoints()
 }

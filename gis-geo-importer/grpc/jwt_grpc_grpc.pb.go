@@ -4,7 +4,7 @@
 // - protoc             v4.22.2
 // source: JwtGrpc.proto
 
-package GisGrpc
+package grpc
 
 import (
 	context "context"

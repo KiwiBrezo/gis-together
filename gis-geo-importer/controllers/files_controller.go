@@ -1,9 +1,9 @@
-package GisControllers
+package controllers
 
 import (
 	"fmt"
-	"gis-geo-importer/GisModels"
-	GisService "gis-geo-importer/GisServices"
+	"gis-geo-importer/models"
+	GisService "gis-geo-importer/services"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -33,7 +33,7 @@ func (controller *FilesController) BindEndpoints() {
 // uploadFile godoc
 // @Summary Saves geojson
 // @Description Saves geojson to local storage and saves it do the database.
-// @Param request body GisModels.FeatureCollection true "geojson"
+// @Param request body models.FeatureCollection true "geojson"
 // @Accept json
 // @Produce json
 // @Router /file [post]
@@ -48,7 +48,7 @@ func (controller *FilesController) uploadFile(c *gin.Context) {
 		return
 	}
 
-	var geojsonData GisModels.FeatureCollection
+	var geojsonData models.FeatureCollection
 
 	err := c.ShouldBindJSON(&geojsonData)
 

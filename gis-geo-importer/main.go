@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gis-geo-importer/GisApi"
-	"gis-geo-importer/GisReposetory"
+	"gis-geo-importer/api"
+	"gis-geo-importer/reposetory"
 )
 
 // @title           Swagger geo-import API
@@ -19,7 +19,7 @@ import (
 func main() {
 	var endpointRouter = GisApi.HttpApi{}
 
-	GisReposetory.ConnectToMongoDB()
+	reposetory.ConnectToMongoDB()
 
 	endpointRouter.Init()
 

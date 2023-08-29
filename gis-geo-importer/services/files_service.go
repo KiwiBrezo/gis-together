@@ -3,25 +3,25 @@ package service
 import (
 	"encoding/json"
 	"fmt"
-	"gis-geo-importer/GisModels"
-	"gis-geo-importer/GisReposetory"
+	"gis-geo-importer/models"
+	"gis-geo-importer/reposetory"
 	"log"
 	"os"
 )
 
 type FilesService struct {
 	pathToFileFolder         string
-	fileDBConnector          *GisReposetory.FilesRepository
+	fileDBConnector          *reposetory.FilesRepository
 	newGeojsonPublishService *NewGeojsonPublishService
 }
 
 func (service *FilesService) Init() {
 	service.pathToFileFolder = "./files"
-	service.fileDBConnector = &GisReposetory.FilesRepository{}
+	service.fileDBConnector = &reposetory.FilesRepository{}
 	service.newGeojsonPublishService = &NewGeojsonPublishService{}
 }
 
-func (service *FilesService) SaveNewFile(geojson *GisModels.FeatureCollection) (insertedId string, err error) {
+func (service *FilesService) SaveNewFile(geojson *models.FeatureCollection) (insertedId string, err error) {
 	insertedId, err = service.fileDBConnector.SaveGeojsonToDB(geojson)
 	if err != nil {
 		return

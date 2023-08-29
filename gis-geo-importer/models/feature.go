@@ -1,4 +1,4 @@
-package GisModels
+package models
 
 type Feature struct {
 	Type       string                 `json:"type"`

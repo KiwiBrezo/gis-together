@@ -41,7 +41,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/GisModels.FeatureCollection"
+                            "$ref": "#/definitions/models.FeatureCollection"
                         }
                     }
                 ],
@@ -86,11 +86,11 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "GisModels.Feature": {
+        "models.Feature": {
             "type": "object",
             "properties": {
                 "geometry": {
-                    "$ref": "#/definitions/GisModels.Geometry"
+                    "$ref": "#/definitions/models.Geometry"
                 },
                 "properties": {
                     "type": "object",
@@ -101,7 +101,7 @@ const docTemplate = `{
                 }
             }
         },
-        "GisModels.FeatureCollection": {
+        "models.FeatureCollection": {
             "type": "object",
             "properties": {
                 "crs": {
@@ -111,7 +111,7 @@ const docTemplate = `{
                 "features": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/GisModels.Feature"
+                        "$ref": "#/definitions/models.Feature"
                     }
                 },
                 "name": {
@@ -122,7 +122,7 @@ const docTemplate = `{
                 }
             }
         },
-        "GisModels.Geometry": {
+        "models.Geometry": {
             "type": "object",
             "properties": {
                 "coordinates": {},

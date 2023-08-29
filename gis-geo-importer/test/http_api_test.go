@@ -1,7 +1,7 @@
 package test
 
 import (
-	"gis-geo-importer/GisApi"
+	"gis-geo-importer/api"
 	"github.com/go-playground/assert/v2"
 	"net/http"
 	"net/http/httptest"
@@ -20,7 +20,7 @@ func Test_httpPing(t *testing.T) {
 }
 
 /*func Test_httpSwagger(t *testing.T) {
-	httpApi := GisApi.HttpApi{}
+	httpApi := api.HttpApi{}
 	httpApi.Init()
 
 	w := httptest.NewRecorder()

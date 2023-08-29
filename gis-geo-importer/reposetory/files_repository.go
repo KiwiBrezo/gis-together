@@ -1,8 +1,8 @@
-package GisReposetory
+package reposetory
 
 import (
 	"context"
-	"gis-geo-importer/GisModels"
+	"gis-geo-importer/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
@@ -11,7 +11,7 @@ import (
 type FilesRepository struct {
 }
 
-func (repository *FilesRepository) SaveGeojsonToDB(geojson *GisModels.FeatureCollection) (id string, err error) {
+func (repository *FilesRepository) SaveGeojsonToDB(geojson *models.FeatureCollection) (id string, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 

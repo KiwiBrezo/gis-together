@@ -1,4 +1,4 @@
-package GisConfigs
+package configs
 
 import (
 	"github.com/joho/godotenv"

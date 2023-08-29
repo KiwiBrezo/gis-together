@@ -1,8 +1,8 @@
-package GisReposetory
+package reposetory
 
 import (
 	"context"
-	"gis-geo-importer/GisConfigs"
+	"gis-geo-importer/configs"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -16,7 +16,7 @@ func ConnectToMongoDB() {
 		return
 	}
 
-	newMongoInstance, err := mongo.NewClient(options.Client().ApplyURI(GisConfigs.GetENVByKey("MONGODB_URL")))
+	newMongoInstance, err := mongo.NewClient(options.Client().ApplyURI(configs.GetENVByKey("MONGODB_URL")))
 	if err != nil {
 		log.Printf("(ConnectToMongoDB) There was an error creating the mongoDB mongoDBInstance: %v", err)
 	}
